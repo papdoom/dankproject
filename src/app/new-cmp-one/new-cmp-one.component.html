@@ -1,0 +1,161 @@
+<div class="container">
+    <h2>{{ newText1 }}</h2>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+                <h3>*ngFor - Months! (If you still don't know them)</h3>
+        </div>
+        <div class="panel-body">
+            <select>
+                <option *ngFor="let month of months">{{ month }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>*ngIf - Are you available tonight?</h3>
+        </div>
+        <div class="panel-body">
+            <span *ngIf="isAvailable">isAvailable si aqoe</span>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>*ngIf and else - Are you occupied tonight?</h3>
+        </div>
+        <div class="panel-body">
+            <span *ngIf="isOccupied; else conditionElse">isOccupied si aqoe</span>
+            <ng-template #conditionElse>Nope :3</ng-template>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>*ngIf, then and else - Are you single and ready jumingle?</h3>
+        </div>
+        <div class="panel-body">
+            <span *ngIf="isReadyString == 'maybe'; then conditionThen else conditionElse">isOccupied si aqoe</span> <!-- or use .include('string') -->
+            <ng-template #conditionThen>Maybe? hihi</ng-template>
+            <ng-template #conditionElse>Nope :3</ng-template>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Event Binding - Click to see magic</h3>
+        </div>
+        <div class="panel-body">
+            <button (click)="ultimateMagicClickFunction($event)">Touch me!</button><!-- ultimate-magic-image.png -->
+            <img id="magic-image" alt="magic disapear" src="./assets/ultimate-magic-image.png" style="display: none;">
+        </div>
+    </div>
+            
+    <div id="select-magic"  class="panel panel-default">
+        <div class="panel-heading">
+            <h3>*ngFor - Months! (With magic!)</h3>
+        </div>
+        <div class="panel-body">
+            <div>
+                <select id="four-seasons-select" (change)="changeSeason($event)">
+                    <option *ngFor="let month of months; let i = index" [attr.value]="i" class="season-select">{{ month }}</option><!-- attr.data-index as custom attribute -->
+                </select>
+            </div>
+            <br>
+            <img id="season-spring" alt="four seasons" src="./assets/season-spring.jpg" style="display: none;">
+            <img id="season-fall" alt="four seasons" src="./assets/season-fall.jpg" style="display: none;">
+            <img id="season-summer" alt="four seasons" src="./assets/season-summer.jpg" style="display: none;">
+            <img id="season-winter" alt="four seasons" src="./assets/season-winter.jpg">
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Custom Directive</h3>
+        </div>
+        <div class="panel-body">
+            <span changeText>hit the fan</span>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Pipes</h3>
+        </div>
+        <div class="panel-body">
+            <div><b>Upper case: </b> {{ newText1 | uppercase }}</div>
+            <div><b>Lower case: </b> {{ newText1 | lowercase }}</div>
+            <div><b>Currency: </b> {{ 8000.23 | currency:"USD":false }}</div>
+            <div><b>Currency with symbol: </b> {{ 8000 | currency:"USD":true }}</div>
+            <div><b>Date today: </b> {{ dateToday | date:'d/M/y' }}</div>
+            <div><b>Date today: </b> {{ dateToday | date:'shortTime' }}</div>
+            <div><b>Decimal: </b> {{ 789.789 | number:'4.1-2' }}</div> <!-- 4 is for main integer, 1-2 are range for decimal integers to be displayed. -->         
+            <div><b>JSON: </b> {{ jsonVal | json }}</div> <!-- will be displayed as [object Object] if no json pipe -->
+            <div><b>Percent: </b> {{ 00.89115 | percent }}</div>
+            <div><b>Slice: </b> {{ months | slice:2:6 }}</div> <!-- will pick months between range -->
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Custom Pipe</h3>
+        </div>
+        <div class="panel-body">
+            <div><b>Square root of 25 is: </b> {{ 25 | sqrt }}</div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Service - Not a Naruto fan</h3>
+        </div>
+        <div class="panel-body" style="text-align: center;">
+            <button (click)="reactionClickFunction($event)">~KAGEBUNSHIN NO JUTSUUUUU!~</button><br><br><!-- impossiburu-image.png -->
+            <div class="naruto-list">( ͡° ͜ʖ ͡°)</div>
+            <div class="naruto-list" *ngFor="let magic of magicOne">
+                <div>{{ magic.one }}</div>
+                <div>{{ magic.two }}</div>
+                <div>{{ magic.three }}</div>
+                <div>{{ magic.four }}</div>
+                <div>{{ magic.five }}</div>
+            </div>
+            <br>
+            <img id="impossiburu-image" alt="IMPOSSIBURUUUUUUUUUUU!" src="./assets/impossiburu-image.jpeg" style="display: none;margin: auto;">
+        </div>
+    </div>
+
+    <div id="http-service-panel" class="panel panel-default">
+        <div class="panel-heading">
+            <h3>HTTP Service - Top 10 Memes</h3>
+        </div>
+        <div class="panel-body">
+            <ol>
+                <li *ngFor = "let meme of memeJson | slice:0:10;"><!-- slice:0:10; pipe gets only the entries between the params-->
+                    <h4>{{ meme.name }}</h4>
+                    <img [attr.src]="meme.url"><br><br>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>HTTP Service - Non Form Search Memes</h3>
+        </div>
+        <div class="panel-body">
+            <label>Parameter</label>
+            <input type="text" id="param" name="param">
+            <button type="button" (click)="searchMemeByNameFunction($event)">Search!</button>
+            <div>
+                <ul>
+                    <li *ngFor = "let result of results">
+                        <b>Name:</b> {{ result.name }}
+                        <br>
+                        <b>Image URL:</b> {{ result.url }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

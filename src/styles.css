@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #ccc;
+    font-family: 'Itim', cursive;
+}
+
+h1, h2, h3 {
+    font-family: 'Pacifico', cursive;
+    text-decoration: underline;
+}
+
+#select-magic img{
+    height: 250px;
+    width: 250px;
+}
+/* Other Fonts
+font-family: 'Mina', sans-serif;
+font-family: 'Indie Flower', cursive;
+*/
